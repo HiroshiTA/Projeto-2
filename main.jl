@@ -30,6 +30,7 @@ j = 1
 C = zeros(m)
 v = zeros(m)
 D = zeros(m,n)
+a = 1 
 for k = 1:max_iter
     while i <= m
         a = A[i,j]
@@ -42,6 +43,7 @@ for k = 1:max_iter
         i = i + 1
         j = j + 1
     end
+    D[:,a] = v
 end
 return v
 #reverse.(v)
