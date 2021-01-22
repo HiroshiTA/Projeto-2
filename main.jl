@@ -37,22 +37,29 @@ function Método_Jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) #C é o vetor do chut
               
         #Para achar o maior dos x dentro do vetor v."
         maiorx = abs(v[1])
+        println("maior x = $maiorx")
+        
+        distancia = abs.(v - C)
+        println("|x^(k) - x^(k-1)| = $distancia")
+        maiord = distancia[1] 
+        
         for h = 2:length(v)
             if maiorx < abs(v[h])
                 maiorx = abs(v[h])
             end
         end
-        #Para achar a maior distancia entre x^(k) - x^(k-1)"
-        distancia = abs.(v - C)
-        maiord = distancia[1] 
+        
         for l = 2:length(distancia)
             if maiord < abs(distancia[l])
                 maiord = abs(distancia[l])
             end
         end
         
-        erro = maiord / maiord          #Erro Relativo
-        C = v                           #Atualização da matriz para a proxima iterção: x^(k-1) = x^(k)
+        erro = maiord / maiorx
+        
+        println("Erro Relativo = $erro")
+        C = v
+        println("x^k = $C")
         k = k + 1
     end
     return v
