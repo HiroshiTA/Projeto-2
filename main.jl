@@ -137,7 +137,7 @@ function Método_SOR(A, B, C, max_iter = 100, ω = 1.25, ϵ = 1e-4) #C é o veto
             b = B[j]     
             E = A[i,:]
             R = b - dot(E,C) 
-            x = C[i] + ω * R / a
+            x = C[i] + (ω / a) * R
             push!(v,x)
             C[i] = x
             i = i + 1
