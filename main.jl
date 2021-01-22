@@ -173,3 +173,8 @@ function Método_SOR(A, B, C, max_iter = 100, ω = 1.25, ϵ = 1e-4) #C é o veto
     end
     return v
 end
+
+
+
+
+
