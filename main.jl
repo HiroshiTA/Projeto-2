@@ -62,6 +62,7 @@ function Método_Jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) #C é o vetor do chut
 end
 
 
+
 function Método_Gauss_Seidel(A, B, C, max_iter = 100, ϵ = 1e-3) #C é o vetor do chute inicial ou de zeros.
     m,n = size(A)
     k = 1    #número de iterações 
@@ -118,6 +119,8 @@ function Método_Gauss_Seidel(A, B, C, max_iter = 100, ϵ = 1e-3) #C é o vetor 
     end
     return v
 end
+
+
 
 function Método_SOR(A, B, C, max_iter = 100, ω = 1.25, ϵ = 1e-4) #C é o vetor do chute inicial ou de zeros.
     m,n = size(A)
