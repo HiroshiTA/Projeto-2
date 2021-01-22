@@ -16,7 +16,7 @@ function Método_Jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) #C é o vetor do chut
     v = zeros(0)    #vetor que recebe os x1, x2, ..., xn.
     erro = 1
     print(ϵ)
-    while (k <= max_iter) || (erro > ϵ)
+    while (k <= max_iter) && (erro > ϵ)
         i = 1
         j = 1
         v = zeros(0)
