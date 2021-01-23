@@ -23,7 +23,6 @@ function Método_Jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) # C: vetor do chute i
             i = i + 1
             j = j + 1
         end
-        #println(v)
               
         #Para achar o maior dos x dentro do vetor v
         maiorx = abs(v[1])
@@ -32,11 +31,9 @@ function Método_Jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) # C: vetor do chute i
                 maiorx = abs(v[h])
             end
         end
-        #println("maior x = $maiorx")
         
         #A maior distancia entre as soluções dos x".
         distancia = abs.(v - C)
-        #println("|x^(k) - x^(k-1)| = $distancia")
         maiord = distancia[1]         
         for l = 2:length(distancia)
             if maiord < abs(distancia[l])
@@ -45,27 +42,25 @@ function Método_Jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) # C: vetor do chute i
         end
         
         erro = maiord / maiorx          #Erro Relativo
-        #println("Erro Relativo = $erro")
-        C = v                           #Atualização da nova matriz: x^k-1 = x^k.
-        #println("x^k = $C")
+        C = v                           #Atualização do vetor C.
         k = k + 1
     end
-    return v
+    println("Números de Iterações = $k")
+    println("Vetor solução = $v")
 end
 
 
-function Método_Gauss_Seidel(A, B, C, max_iter = 100, ϵ = 1e-3) #C é o vetor do chute inicial ou de zeros.
+function Método_Gauss_Seidel(A, B, C, max_iter = 100, ϵ = 1e-3)
     m,n = size(A)
-    k = 1    #número de iterações 
-    v = zeros(0)
+    k = 1
     erro = 1.0
     while (k <= max_iter) && (erro > ϵ)
         i = 1
         j = 1
-        v = zeros(0)   #vetor que recebe os x1, x2, ..., xn.
+        v = zeros(0)
         C2 = copy(C)
         while i <= m
-            a = A[i,j]        #elementos da Diagonal Principal
+            a = A[i,j]
             b = B[j]
             o = (b/a)     
             E = A[i,:]
@@ -73,27 +68,19 @@ function Método_Gauss_Seidel(A, B, C, max_iter = 100, ϵ = 1e-3) #C é o vetor 
             p = (dot(E,C))/a     
             x = o - p
             push!(v,x)
-            C[i] = x
+            C[i] = x                #Atualização de cada x_i
             i = i + 1
             j = j + 1
-            println(a)
         end
-        println(v)
         
-        #Para achar o maior dos x dentro do vetor v
         maiorx = abs(v[1])
         for h = 2:length(v)
             if maiorx < abs(v[h])
                 maiorx = abs(v[h])
             end
         end
-        println("maior x = $maiorx")
-        println(C2)
-        
-        #A maior distancia entre as soluções dos x".
         
         distancia = abs.(v - C2)
-        println("|x^(k) - x^(k-1)| = $distancia")
         maiord = distancia[1]         
         for l = 2:length(distancia)
             if maiord < abs(distancia[l])
@@ -101,50 +88,42 @@ function Método_Gauss_Seidel(A, B, C, max_iter = 100, ϵ = 1e-3) #C é o vetor 
             end
         end
         
-        erro = maiord / maiorx          #Erro Relativo
-        println("Erro Relativo = $erro")
-        C = v                           #Atualização da nova matriz: x^k-1 = x^k.
-        println("x^k = $C")
+        erro = maiord / maiorx
+        C = v
         k = k + 1
-        println("")
     end
-    return v
+    println("Números de Iterações = $k")
+    println("Vetor solução = $v")
 end
 
 
-function Método_SOR(A, B, C, max_iter = 100, ω = 1.25, ϵ = 1e-4) #C é o vetor do chute inicial ou de zeros.
+function Método_SOR(A, B, C, max_iter = 100, ω = 1.25, ϵ = 1e-4)        # w : coeficiente de relaxamento.
     m,n = size(A)
-    k = 1    #número de iterações 
-    v = zeros(0)
+    k = 1
     erro = 1.0
     while (k <= max_iter) && (erro > ϵ)
         i = 1
         j = 1
-        v = zeros(0)   #vetor que recebe os x1, x2, ..., xn.
+        v = zeros(0)
         C2 = copy(C)
         while i <= m
-            a = A[i,j]        #elementos da Diagonal Principal
+            a = A[i,j]
             b = B[j]     
             E = A[i,:]
-            R = b - dot(E,C) 
+            R = b - dot(E,C)                #Resíduo
             x = C[i] + (ω / a) * R
             push!(v,x)
             C[i] = x
             i = i + 1
             j = j + 1
-            println(R)
         end
-        
-        #Para achar o maior dos x dentro do vetor v
+    
         maiorx = abs(v[1])
         for h = 2:length(v)
             if maiorx < abs(v[h])
                 maiorx = abs(v[h])
             end
         end
-        println("maior x = $maiorx")
-        
-        #A maior distancia entre as soluções dos x".
         
         distancia = abs.(v - C2)      
         maiord = distancia[1]         
@@ -155,13 +134,11 @@ function Método_SOR(A, B, C, max_iter = 100, ω = 1.25, ϵ = 1e-4) #C é o veto
         end
         
         erro = maiord / maiorx          #Erro Relativo
-        println("Erro Relativo = $erro")
-        C = v                           #Atualização da nova matriz: x^k-1 = x^k.
-        println("x^k = $C")
+        C = v
         k = k + 1
-        println("")
     end
-    return v
+    println("Números de Iterações = $k")
+    println("Vetor solução = $v")
 end
 
 
@@ -170,7 +147,6 @@ function converge(A, metodo)
     
     # 1 = Jacobi
     # 2 = Gauss-Seidel
-    # 3 = SOR
     
     soma = 0
     r = 0
@@ -224,17 +200,14 @@ function converge(A, metodo)
         end
         if p < 1
             soma = soma + 1    
-            println("Pelo critério de Sassenfeld a matriz converge")
+            println("Pelo critério de Sassenfeld a matriz converge.")
         else
-            println("Pelo critério de Sassenfeld a matriz não converge")
+            println("Pelo critério de Sassenfeld a matriz não converge.")
         end
     end
     if soma != 0
-        println("Conclusão: Converge")
+        println("Conclusão: Converge.")
     else
-        println("Conclusão: Pode ser que não converga")
+        println("Conclusão: Pode ser que não converga.")
     end
 end
-
-
-
