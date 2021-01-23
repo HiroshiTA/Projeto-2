@@ -2,7 +2,7 @@
 
 using LinearAlgebra
 
-function metodo_jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) # C: vetor do chute inicial.
+function metodo_jacobi(A, B, C, max_iter = 100, ϵ= 1e-5) # C: vetor do chute inicial.
     m,n = size(A)  
     k = 1                           #número de iterações
     v = zeros(0)                   
@@ -50,7 +50,7 @@ function metodo_jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) # C: vetor do chute in
 end
 
 
-function metodo_gauss_seidel(A, B, C, max_iter = 100, ϵ = 1e-3)
+function metodo_gauss_seidel(A, B, C, max_iter = 100, ϵ = 1e-5)
     m,n = size(A)
     k = 1
     erro = 1.0
@@ -97,7 +97,7 @@ function metodo_gauss_seidel(A, B, C, max_iter = 100, ϵ = 1e-3)
 end
 
 
-function metodo_SOR(A, B, C, max_iter = 100, ω = 1.25, ϵ = 1e-4)        # w : coeficiente de relaxamento.
+function metodo_SOR(A, B, C, max_iter = 100, ω = 1.25, ϵ = 1e-5)        # w : coeficiente de relaxamento.
     m,n = size(A)
     k = 1
     erro = 1.0
