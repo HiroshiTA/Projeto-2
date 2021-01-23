@@ -173,9 +173,9 @@ function converge(A, metodo)
         end
         if p < 1
             soma = soma + 1
-            println("Pelo critério das linhas a matriz converge")
+            println("Pelo critério das linhas a matriz converge.")
         else
-            println("Pelo critério das linhas a matriz não converge")
+            println("Pelo critério das linhas a matriz não converge.")
         end
     end
     
@@ -208,6 +208,6 @@ function converge(A, metodo)
     if soma != 0
         println("Conclusão: Converge.")
     else
-        println("Conclusão: Pode ser que não converga.")
+        println("Conclusão: Pode ser que não convirja.")
     end
 end
