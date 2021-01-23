@@ -1,27 +1,21 @@
-using LinearAlgebra
-# 10x + 3y - 2z = 57
-# 2x + 8y -1z = 20
-# x + y + 5z = -4
-#A = [10 3 -2; 2 8 -1; 1 1 5]
-#B = [57, 20, -4]
-#C = [0, 0, 0]
+# Dado o sistema: Ax = B
 
-function Método_Jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) #C é o vetor do chute inicial ou de zeros.
+using LinearAlgebra
+
+function Método_Jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) # C: vetor do chute inicial.
     m,n = size(A)  
-    i = 1
-    j = 1
-    k = 1     #número de iterações
-    v = zeros(0)    #vetor que recebe os x1, x2, ..., xn.
-    erro = 1
+    k = 1                           #número de iterações
+    v = zeros(0)                   
+    erro = 1.0
     while (k <= max_iter) && (erro > ϵ)
         i = 1
         j = 1
-        v = zeros(0)
+        v = zeros(0)                #vetor que recebe os x1, x2, ..., xn, en cada iteração.
         while i <= m
-            a = A[i,j]                #elementos da Diagonal Principal
+            a = A[i,j]
             b = B[j]
             o = (b/a) 
-            E = A[i,:]
+            E = A[i,:]              # E: Matriz A com os elementos da diagonal valendo 0.
             E[i] = 0
             n = (dot(E,C))/a     
             x = o - n
