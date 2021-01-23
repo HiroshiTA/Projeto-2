@@ -7,7 +7,7 @@ function metodo_jacobi(A, B, C, max_iter = 100, ϵ= 1e-5) # C: vetor do chute in
     k = 1                           #número de iterações
     v = zeros(0)                   
     erro = 1.0
-    while (k <= max_iter) && (erro > ϵ)
+    while (k < max_iter) && (erro > ϵ)
         i = 1
         j = 1
         v = zeros(0)                #vetor que recebe os x1, x2, ..., xn, en cada iteração.
@@ -54,7 +54,7 @@ function metodo_gauss_seidel(A, B, C, max_iter = 100, ϵ = 1e-5)
     m,n = size(A)
     k = 1
     erro = 1.0
-    while (k <= max_iter) && (erro > ϵ)
+    while (k < max_iter) && (erro > ϵ)
         i = 1
         j = 1
         v = zeros(0)
@@ -101,7 +101,7 @@ function metodo_SOR(A, B, C, ω = 1.25, max_iter = 100, ϵ = 1e-5)        # w : 
     m,n = size(A)
     k = 1
     erro = 1.0
-    while (k <= max_iter) && (erro > ϵ)
+    while (k < max_iter) && (erro > ϵ)
         i = 1
         j = 1
         v = zeros(0)
