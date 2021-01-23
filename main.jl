@@ -185,7 +185,6 @@ function converge(A, metodo)
     
     if (metodo == 1) || (metodo == 2)
     #Critério das linhas
-        
         s = 0
         p = 0
         for a = 1:m
@@ -214,8 +213,7 @@ function converge(A, metodo)
     #Critério de sassenfeld
         s = 0
         p = 0
-        
-        
+               
         for a = 1:m
             s = 0
             for b = 1:n
