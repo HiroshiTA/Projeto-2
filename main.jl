@@ -6,8 +6,6 @@ using LinearAlgebra
 #B = [57, 20, -4]
 #C = [0, 0, 0]
 
-using LinearAlgebra
-
 function Método_Jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) #C é o vetor do chute inicial ou de zeros.
     m,n = size(A)  
     i = 1
@@ -60,7 +58,6 @@ function Método_Jacobi(A, B, C, max_iter = 100, ϵ= 1e-3) #C é o vetor do chut
     end
     return v
 end
-
 
 
 function Método_Gauss_Seidel(A, B, C, max_iter = 100, ϵ = 1e-3) #C é o vetor do chute inicial ou de zeros.
@@ -121,7 +118,6 @@ function Método_Gauss_Seidel(A, B, C, max_iter = 100, ϵ = 1e-3) #C é o vetor 
 end
 
 
-
 function Método_SOR(A, B, C, max_iter = 100, ω = 1.25, ϵ = 1e-4) #C é o vetor do chute inicial ou de zeros.
     m,n = size(A)
     k = 1    #número de iterações 
@@ -175,6 +171,78 @@ function Método_SOR(A, B, C, max_iter = 100, ω = 1.25, ϵ = 1e-4) #C é o veto
 end
 
 
+
+function converge(A, metodo)
+    
+    # 1 = Jacobi
+    # 2 = Gauss-Seidel
+    # 3 = SOR
+    
+    soma = 0
+    r = 0
+    m, n = size(A)
+    z = ones(m)
+    
+    if (metodo == 1) || (metodo == 2)
+    #Critério das linhas
+        
+        s = 0
+        p = 0
+        for a = 1:m
+            for b = 1:n
+                if b == a
+                    r = abs(A[a, a])
+                else
+                    s = s + abs(A[a, b])
+                end
+                b = b + 1
+            end
+            if (s/r) >= p
+                p = s/r
+            end
+            a = a + 1
+        end
+        if p < 1
+            soma = soma + 1
+            println("Pelo critério das linhas a matriz converge")
+        else
+            println("Pelo critério das linhas a matriz não converge")
+        end
+    end
+    
+    if (metodo == 2)
+    #Critério de sassenfeld
+        s = 0
+        p = 0
+        
+        
+        for a = 1:m
+            s = 0
+            for b = 1:n
+                if b == a
+                    r = abs(A[a, b])
+                else
+                    s = s + z[b]* abs(A[a, b])
+                end
+            end
+            z[a]= s/r
+            if (s/r) >= p
+                p = s/r
+            end
+        end
+        if p < 1
+            soma = soma + 1    
+            println("Pelo critério de Sassenfeld a matriz converge")
+        else
+            println("Pelo critério de Sassenfeld a matriz não converge")
+        end
+    end
+    if soma != 0
+        println("Conclusão: Converge")
+    else
+        println("Conclusão: Pode ser que não converga")
+    end
+end
 
 
 
