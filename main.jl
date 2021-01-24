@@ -17,8 +17,8 @@ function metodo_jacobi(A, B, C, max_iter = 100, ϵ= 1e-5) # C: vetor do chute in
             o = (b/a) 
             E = A[i,:]              # E: Matriz A com os elementos da diagonal valendo 0.
             E[i] = 0
-            n = (dot(E,C))/a     
-            x = o - n
+            p = (dot(E,C))/a     
+            x = o - p
             push!(v, x)
             i = i + 1
             j = j + 1
@@ -93,7 +93,7 @@ function metodo_gauss_seidel(A, B, C, max_iter = 100, ϵ = 1e-5)
         k = k + 1
     end
     println("Números de Iterações = $k")
-    println("Vetor solução = $v")
+    println("Vetor solução = $C")
 end
 
 
@@ -138,7 +138,7 @@ function metodo_SOR(A, B, C, ω = 2, max_iter = 100, ϵ = 1e-5)        # w : coe
         k = k + 1
     end
     println("Números de Iterações = $k")
-    println("Vetor solução = $v")
+    println("Vetor solução = $C")
 end
 
 
