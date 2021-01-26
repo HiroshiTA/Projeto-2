@@ -45,8 +45,9 @@ function metodo_jacobi(A, B, C, max_iter = 100, ϵ= 1e-5) # C: vetor do chute in
         C = v                           #Atualização do vetor C.
         k = k + 1
     end
-    println("Números de Iterações = $k")
-    println("Vetor solução = $v")
+    #println("Números de Iterações = $k")
+    #println("Vetor solução = $v")
+    return "Números de Iterações = $k", "Vetor solução = $v"
 end
 
 
@@ -92,8 +93,7 @@ function metodo_gauss_seidel(A, B, C, max_iter = 100, ϵ = 1e-5)
         C = v
         k = k + 1
     end
-    println("Números de Iterações = $k")
-    println("Vetor solução = $C")
+    return "Números de Iterações = $k", "Vetor solução = $C"
 end
 
 
@@ -137,10 +137,8 @@ function metodo_SOR(A, B, C, ω = 2, max_iter = 100, ϵ = 1e-5)        # w : coe
         C = v
         k = k + 1
     end
-    println("Números de Iterações = $k")
-    println("Vetor solução = $C")
+    return "Números de Iterações = $k", "Vetor solução = $C"
 end
-
 
 
 function converge(A, metodo)
