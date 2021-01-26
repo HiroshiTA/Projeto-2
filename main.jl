@@ -8,20 +8,16 @@ function metodo_jacobi(A, B, C, max_iter = 100, ϵ= 1e-5) # C: vetor do chute in
     v = zeros(0)                   
     erro = 1.0
     while (k < max_iter) && (erro > ϵ)
-        i = 1
-        j = 1
         v = zeros(0)                #vetor que recebe os x1, x2, ..., xn, en cada iteração.
-        while i <= m
-            a = A[i,j]
-            b = B[j]
+        for i = 1:m
+            a = A[i,i]
+            b = B[i]
             o = (b/a) 
             E = A[i,:]              # E: Matriz A com os elementos da diagonal valendo 0.
             E[i] = 0
             p = (dot(E,C))/a     
             x = o - p
             push!(v, x)
-            i = i + 1
-            j = j + 1
         end
               
         #Para achar o maior dos x dentro do vetor v
@@ -56,13 +52,11 @@ function metodo_gauss_seidel(A, B, C, max_iter = 100, ϵ = 1e-5)
     k = 1
     erro = 1.0
     while (k < max_iter) && (erro > ϵ)
-        i = 1
-        j = 1
         v = zeros(0)
         C2 = copy(C)
-        while i <= m
-            a = A[i,j]
-            b = B[j]
+        for i = 1:m
+            a = A[i,i]
+            b = B[i]
             o = (b/a)     
             E = A[i,:]
             E[i] = 0
@@ -70,8 +64,6 @@ function metodo_gauss_seidel(A, B, C, max_iter = 100, ϵ = 1e-5)
             x = o - p
             push!(v,x)
             C[i] = x                #Atualização de cada x_i
-            i = i + 1
-            j = j + 1
         end
         
         maiorx = abs(v[1])
@@ -102,20 +94,16 @@ function metodo_SOR(A, B, C, ω = 2, max_iter = 100, ϵ = 1e-5)        # w : coe
     k = 1
     erro = 1.0
     while (k < max_iter) && (erro > ϵ)
-        i = 1
-        j = 1
         v = zeros(0)
         C2 = copy(C)
-        while i <= m
-            a = A[i,j]
-            b = B[j]     
+        for i = 1:m
+            a = A[i,i]
+            b = B[i]     
             E = A[i,:]
             R = b - dot(E,C)                #Resíduo
             x = C[i] + (ω / a) * R
             push!(v,x)
             C[i] = x
-            i = i + 1
-            j = j + 1
         end
     
         maiorx = abs(v[1])
@@ -140,6 +128,8 @@ function metodo_SOR(A, B, C, ω = 2, max_iter = 100, ϵ = 1e-5)        # w : coe
     return "Números de Iterações = $k", "Vetor solução = $C"
 end
 
+
+# Verificação se a solução do sistema converge ou não. Esta função é apenas uma condição suficiente no método.
 
 function converge(A, metodo)
     
