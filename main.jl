@@ -41,8 +41,6 @@ function metodo_jacobi(A, B, C, max_iter = 100, ϵ= 1e-5) # C: vetor do chute in
         C = v                           #Atualização do vetor C.
         k = k + 1
     end
-    #println("Números de Iterações = $k")
-    #println("Vetor solução = $v")
     return "Números de Iterações = $k", "Vetor solução = $v"
 end
 
@@ -131,11 +129,11 @@ end
 
 # Verificação se a solução do sistema converge ou não. Esta função é apenas uma condição suficiente no método.
 
-function converge(A, metodo)
-    
+# metodo = 1 ou 2    
     # 1 = Jacobi
     # 2 = Gauss-Seidel
-    
+
+function converge(A, metodo)    
     soma = 0
     r = 0
     m, n = size(A)
